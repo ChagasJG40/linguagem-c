@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definição da estrutura do nó da árvore
+typedef struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+} Node;
+
+// Função para criar um novo nó da árvore
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    if (newNode == NULL) {
+        printf("Erro ao alocar memória para o novo nó.\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+// Função para inserir um novo nó na árvore
+Node* insertNode(Node* root, int data) {
+    if (root == NULL) {
+        root = createNode(data);
+    } else if (data <= root->data) {
+        root->left = insertNode(root->left, data);
+    } else {
+        root->right = insertNode(root->right, data);
+    }
+    return root;
+}
+
+// Função para percorrer a árvore em ordem (in-order)
+void inorderTraversal(Node* root) {
+    if (root != NULL) {
+        inorderTraversal(root->left);
+        printf("%d ", root->data);
+        inorderTraversal(root->right);
+    }
+}
+
+int main() {
+    Node* root = NULL; // Inicializa a árvore vazia
+
+    // Inserindo elementos na árvore
+    root = insertNode(root, 50);
+    root = insertNode(root, 30);
+    root = insertNode(root, 20);
+    root = insertNode(root, 40);
+    root = insertNode(root, 70);
+    root = insertNode(root, 60);
+    root = insertNode(root, 80);
+
+    // Percorrendo a árvore em ordem
+    printf("Árvore em ordem (in-order traversal): ");
+    inorderTraversal(root);
+    printf("\n");
+
+    return 0;
+}
