@@ -1,0 +1,53 @@
+ //Estrutura
+
+struct str_no {
+char dado;
+int esquerda;
+int direita;
+int pai;
+};
+
+//Constantes
+#define tamanho 100
+
+// Variáveis
+
+struct str_no arvore[tamanho];
+int indice=0;
+
+//Procurar nó
+int arvore_procura (char dado) {
+  if (indice !=0) {
+    for (int i = 0; i<indice; i++){
+      if (arvore[i].dado == dado){
+        return (i);
+      }
+    }
+  }
+  else {
+    return (0);
+  }
+}
+
+//Inserir nó
+void arvore_insere (int pai, char dado, int lado){
+  switch (lado){
+    case E:
+      arvore[pai].esquerda = indice;
+      arvore[indice].dado = dado;
+      arvore[indice].pai = pai;
+      arvore[indice].esquerda = -1;
+      arvore[indice].direita = -1;
+      indice++;
+    break;
+
+    case D;
+     arvore[pai].direita = indice;
+      arvore[indice].dado = dado;
+      arvore[indice].pai = pai;
+      arvore[indice].esquerda = -1;
+      arvore[indice].direita = -1;
+      indice++;
+    break;
+  }
+}
